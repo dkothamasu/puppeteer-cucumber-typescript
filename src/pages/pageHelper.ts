@@ -19,10 +19,6 @@ class PageHelper {
         dumpio: false,
       });
       this.page = await this.browser.newPage();
-      await Promise.all([
-        this.page.coverage.startJSCoverage(),
-        this.page.coverage.startCSSCoverage(),
-      ]);
     } catch (Exception) /* istanbul ignore next */ {
       throw new Error(Exception.toString());
     }
@@ -160,9 +156,9 @@ class PageHelper {
    * @returns Promise
    */
 
-  public async screenshot(): Promise<any> {
+  public async screenshot(filename: string): Promise<any> {
     try {
-      return await this.page.screenshot();
+      return await this.page.screenshot({path: filename});
     } catch (Exception) /* istanbul ignore next */ {
       throw new Error(Exception.toString());
     }
